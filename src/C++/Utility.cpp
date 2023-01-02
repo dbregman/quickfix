@@ -171,12 +171,12 @@ socket_handle socket_accept(socket_handle s )
 
 ssize_t socket_recv(socket_handle s, char* buf, size_t length )
 {
-  return recv( s, buf, length, 0 );
+  return recv( s, buf, (int)length, 0 );
 }
 
 ssize_t socket_send(socket_handle s, const char* msg, size_t length )
 {
-  return send( s, msg, length, 0 );
+  return send( s, msg, (int)length, 0 );
 }
 
 void socket_close(socket_handle s )

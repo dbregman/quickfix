@@ -229,7 +229,7 @@ void SocketMonitor::processReadSet( Strategy& strategy, fd_set& readSet )
 #ifdef _MSC_VER
   for ( unsigned i = 0; i < readSet.fd_count; ++i )
   {
-    int s = readSet.fd_array[ i ];
+    SOCKET s = readSet.fd_array[ i ];
     if( s == m_interrupt )
     {
       int socket = 0;
@@ -268,7 +268,7 @@ void SocketMonitor::processWriteSet( Strategy& strategy, fd_set& writeSet )
 #ifdef _MSC_VER
   for ( unsigned i = 0; i < writeSet.fd_count; ++i )
   {
-    int s = writeSet.fd_array[ i ];
+    SOCKET s = writeSet.fd_array[ i ];
     if( m_connectSockets.find(s) != m_connectSockets.end() )
     {
       m_connectSockets.erase( s );
@@ -309,7 +309,7 @@ void SocketMonitor::processExceptSet( Strategy& strategy, fd_set& exceptSet )
 #ifdef _MSC_VER
   for ( unsigned i = 0; i < exceptSet.fd_count; ++i )
   {
-    int s = exceptSet.fd_array[ i ];
+    SOCKET s = exceptSet.fd_array[ i ];
     strategy.onError( *this, s );
   }
 #else
