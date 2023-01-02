@@ -242,7 +242,7 @@ int FieldMap::calculateLength( int beginStringField,
     if ( tag != beginStringField
          && tag != bodyLengthField
          && tag != checkSumField )
-    { result += i->getLength(); }
+    { result += (int)i->getLength(); }
   }
 
   Groups::const_iterator j;

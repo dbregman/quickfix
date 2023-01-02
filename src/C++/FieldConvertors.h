@@ -358,7 +358,7 @@ static bool convert( const std::string& value, double& result )
   if( *i || !haveDigit ) return false;
 
   int processed_chars;
-  const int total_length = value.length();
+  const int total_length = (int)value.length();
   result = fast_strtod( value.c_str(), total_length, &processed_chars);
 
   return true;
@@ -472,7 +472,7 @@ struct UtcTimeStampConvertor
   static UtcTimeStamp convert( const std::string& value )
   EXCEPT ( FieldConvertError )
   {
-    size_t len = value.size();
+    int len = (int)value.size();
     if (len < 17 || len > 27) throw FieldConvertError(value);
 
     size_t i = 0;
@@ -579,7 +579,7 @@ struct UtcTimeOnlyConvertor
   static UtcTimeOnly convert( const std::string& value)
   EXCEPT ( FieldConvertError )
   {
-    size_t len = value.size();
+    int len = (int)value.size();
     if (len < 8 || len > 18) throw FieldConvertError(value);
 
     size_t i = 0;
