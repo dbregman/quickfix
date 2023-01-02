@@ -92,8 +92,8 @@ const bool DONT_VALIDATE = false;
 
 int main( int argc, char** argv )
 {
-  int count = 0;
-  short port = 0;
+  int count = 1000000;
+  short port = 9999;
 
   int opt;
   while ( (opt = getopt( argc, argv, "+p:+c:" )) != -1 )
@@ -795,9 +795,10 @@ long testSendOnSocket( int count, short port )
   acceptor.start();
 
   FIX::SocketInitiator initiator( application, factory, settings );
-  initiator.start();
 
-  FIX::process_sleep( 1 );
+  initiator.start();
+  while( !initiator.isLoggedOn() )
+    FIX::process_sleep( 0.1 );
 
   long start = GetTickCount();
 
@@ -857,9 +858,10 @@ long testSendOnThreadedSocket( int count, short port )
   acceptor.start();
 
   FIX::ThreadedSocketInitiator initiator( application, factory, settings );
-  initiator.start();
 
-  FIX::process_sleep( 1 );
+  initiator.start();
+  while( !initiator.isLoggedOn() )
+    FIX::process_sleep( 0.1 );
 
   long start = GetTickCount();
   for ( int i = 0; i <= count; ++i )
